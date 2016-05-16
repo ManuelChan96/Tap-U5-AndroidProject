@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Tap-U5-ProyectoAndroid</string>
+    <string name="abierto">Abierto</string>
+    <string name="cerrado">Cerrado</string>
     <!--Array con los valores de la cabecera de la tabla-->
     <string-array name="cabecera_tabla">
         <item>Id de la fila</item>
