@@ -1,6 +1,9 @@
 package com.example.josediego.tap_u5_proyectoandroid;
 
 
+import android.content.ClipData.*;
+import android.content.Intent;
+import android.location.GpsStatus;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -9,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TableLayout;
 
 import android.support.v4.widget.DrawerLayout;
@@ -24,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle drawerToggle;
-
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +78,14 @@ public class MainActivity extends AppCompatActivity {
                 R.layout.drawer_list_item, items));
         // Set the list's click listener
         //mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
+        /*MenuItem add = (MenuItem)findViewById(R.id.new_Object_id);
+        add.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                agregarNuevo();
+                return true;
+            }
+        });*/
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -101,8 +112,15 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         final MenuItem searchItem= menu.findItem(R.id.menu_buscar);
         final SearchView searchView= (SearchView) MenuItemCompat.getActionView(searchItem);
+        final MenuItem addItem= menu.findItem(R.id.new_Object_id);
+        addItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                agregarNuevo();
+                return true;
+            }
+        });
         return true;
-
     }
 
     @Override
@@ -110,5 +128,11 @@ public class MainActivity extends AppCompatActivity {
         super.onPostCreate(savedInstanceState);
         drawerToggle.syncState();
     }
-
+    public void agregarNuevo(){
+        intent = new Intent(this, NewObject.class);
+        startActivity(intent);
+    }
+    /*public void OnClickNuevo(View vista){
+        this.agregarNuevo();
+    }*/
 }

@@ -9,8 +9,8 @@
             app:actionViewClass="android.support.v7.widget.SearchView"
             />
         <item
-            android:id="@+id/settings_id"
-            android:title="settings"
+            android:id="@+id/new_Object_id"
+            android:title="Agregar objeto"
             android:icon="@drawable/mas"
             app:showAsAction="ifRoom"
             />
