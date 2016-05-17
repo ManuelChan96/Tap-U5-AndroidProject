@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
         items = getResources().getStringArray(R.array.items_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        View header= getLayoutInflater().inflate(R.layout.header, null);
-        mDrawerList.addHeaderView(header);
+        //View header= getLayoutInflater().inflate(R.layout.header, null);
+        //mDrawerList.addHeaderView(header);
 
         drawerToggle = new ActionBarDrawerToggle(this,
                 mDrawerLayout, R.string.abierto, R.string.cerrado) {

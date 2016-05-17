@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Tap-U5-AndroidProject.iml" filepath="$PROJECT_DIR$/Tap-U5-AndroidProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Tap-U5-AndroidProject.iml" filepath="$PROJECT_DIR$/Tap-U5-AndroidProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tap-U5-ProyectoAndroid.iml" filepath="$PROJECT_DIR$/Tap-U5-ProyectoAndroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
