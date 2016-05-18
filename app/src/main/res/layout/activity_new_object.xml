@@ -33,14 +33,12 @@
         android:layout_height="0dp"
         android:inputType="text"
         android:hint="Tipo de objeto"
-        android:layout_toRightOf="@id/tipo_objeto"
         android:layout_weight="1"
         />
     <TextView
         android:id="@+id/descripcion"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_below="@id/text_tipo_objeto"
         android:textAppearance="?android:textAppearanceLarge"
         android:text="Decripción"
         android:layout_marginRight="5dp"
@@ -52,8 +50,6 @@
         android:layout_height="0dp"
         android:inputType="textMultiLine"
         android:hint="Descripción del objeto"
-        android:layout_toRightOf="@id/descripcion"
-        android:layout_below="@id/text_tipo_objeto"
         android:layout_weight="1"
         />
     <TextView
@@ -62,7 +58,6 @@
         android:layout_height="0dp"
         android:textAppearance="?android:textAppearanceLarge"
         android:text="Cantidad"
-        android:layout_below="@id/text_descripcion"
         android:layout_marginRight="5dp"
         android:layout_weight="1"
         />
@@ -72,8 +67,6 @@
         android:layout_height="0dp"
         android:inputType="number"
         android:hint="Cantidad de objetos prestados"
-        android:layout_toRightOf="@id/cantidad"
-        android:layout_below="@id/text_descripcion"
         android:layout_weight="1"
         />
     <TextView
@@ -82,7 +75,6 @@
         android:layout_height="0dp"
         android:textAppearance="?android:textAppearanceLarge"
         android:text="Nombre Persona"
-        android:layout_below="@id/text_cantidad"
         android:layout_marginRight="5dp"
         android:layout_weight="1"
         />
@@ -92,8 +84,6 @@
         android:layout_height="0dp"
         android:inputType="text"
         android:hint="Persona a la que se le presto"
-        android:layout_toRightOf="@id/nombre_persona"
-        android:layout_below="@id/text_cantidad"
         android:layout_weight="1"
         />
     <TextView
@@ -102,7 +92,6 @@
         android:layout_height="0dp"
         android:textAppearance="?android:textAppearanceLarge"
         android:text="Fecha Prestamo"
-        android:layout_below="@id/text_nombre_persona"
         android:layout_marginRight="5dp"
         android:layout_weight="1"
         />
@@ -112,8 +101,6 @@
         android:layout_height="0dp"
         android:inputType="datetime"
         android:hint="Fecha en que se presto"
-        android:layout_toRightOf="@id/fecha_prestamo"
-        android:layout_below="@id/text_nombre_persona"
         android:layout_weight="1"
         />
     <TextView
@@ -122,7 +109,6 @@
         android:layout_height="0dp"
         android:textAppearance="?android:textAppearanceLarge"
         android:text="Fecha Devolución"
-        android:layout_below="@id/text_fecha_prestamo"
         android:layout_marginRight="5dp"
         android:layout_weight="1"
         />
@@ -132,8 +118,6 @@
         android:layout_height="0dp"
         android:inputType="datetime"
         android:hint="Fecha de supuesta devolución"
-        android:layout_toRightOf="@id/fecha_devolucion"
-        android:layout_below="@id/text_fecha_prestamo"
         android:layout_weight="1"
         />
     <LinearLayout
@@ -147,16 +131,13 @@
         android:layout_height="wrap_content"
         android:text="Guardar"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/text_fecha_devolucion"
         android:layout_marginRight="70dp"
         android:layout_weight="1"
         />
     <Button
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/guardar"
         android:text="Descartar"
-        android:layout_below="@id/text_fecha_devolucion"
         android:layout_weight="1"
         />
     </LinearLayout>
