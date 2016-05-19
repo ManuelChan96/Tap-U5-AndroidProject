@@ -14,133 +14,135 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:layout_weight="1">
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <TextView
-        android:id="@+id/tipo_objeto"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:text="Tipo de Objeto"
-        android:layout_marginRight="5dp"
-        android:layout_weight="1"
-        />
-    <EditText
-        android:id="@+id/text_tipo_objeto"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:inputType="text"
-        android:hint="Tipo de objeto"
-        android:layout_weight="1"
-        />
-    <TextView
-        android:id="@+id/descripcion"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:text="Decripción"
-        android:layout_marginRight="5dp"
-        android:layout_weight="1"
-        />
-    <EditText
-        android:id="@+id/text_descripcion"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:inputType="textMultiLine"
-        android:hint="Descripción del objeto"
-        android:layout_weight="1"
-        />
-    <TextView
-        android:id="@+id/cantidad"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:text="Cantidad"
-        android:layout_marginRight="5dp"
-        android:layout_weight="1"
-        />
-    <EditText
-        android:id="@+id/text_cantidad"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:inputType="number"
-        android:hint="Cantidad de objetos prestados"
-        android:layout_weight="1"
-        />
-    <TextView
-        android:id="@+id/nombre_persona"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:text="Nombre Persona"
-        android:layout_marginRight="5dp"
-        android:layout_weight="1"
-        />
-    <EditText
-        android:id="@+id/text_nombre_persona"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:inputType="text"
-        android:hint="Persona a la que se le presto"
-        android:layout_weight="1"
-        />
-    <TextView
-        android:id="@+id/fecha_prestamo"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:text="Fecha Prestamo"
-        android:layout_marginRight="5dp"
-        android:layout_weight="1"
-        />
-    <EditText
-        android:id="@+id/text_fecha_prestamo"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:inputType="datetime"
-        android:hint="Fecha en que se presto"
-        android:layout_weight="1"
-        />
-    <TextView
-        android:id="@+id/fecha_devolucion"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:text="Fecha Devolución"
-        android:layout_marginRight="5dp"
-        android:layout_weight="1"
-        />
-    <EditText
-        android:id="@+id/text_fecha_devolucion"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:inputType="datetime"
-        android:hint="Fecha de supuesta devolución"
-        android:layout_weight="1"
-        />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
-    <Button
-        android:id="@+id/guardar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Guardar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="70dp"
-        android:layout_weight="1"
-        />
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Descartar"
-        android:layout_weight="1"
-        />
-    </LinearLayout>
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tipo_objeto"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:text="Tipo de Objeto"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                />
+            <EditText
+                android:id="@+id/text_tipo_objeto"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:inputType="text"
+                android:hint="Tipo de objeto"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:id="@+id/descripcion"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:text="Decripción"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                />
+            <EditText
+                android:id="@+id/text_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:inputType="textMultiLine"
+                android:hint="Descripción del objeto"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:id="@+id/cantidad"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:text="Cantidad"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                />
+            <EditText
+                android:id="@+id/text_cantidad"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:inputType="number"
+                android:hint="Cantidad de objetos prestados"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:id="@+id/nombre_persona"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:text="Nombre Persona"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                />
+            <EditText
+                android:id="@+id/text_nombre_persona"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:inputType="text"
+                android:hint="Persona a la que se le presto"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:id="@+id/fecha_prestamo"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:text="Fecha Prestamo"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                />
+            <EditText
+                android:id="@+id/text_fecha_prestamo"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:inputType="date"
+                android:hint="Fecha en que se presto"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:id="@+id/fecha_devolucion"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:text="Fecha Devolución"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                />
+            <EditText
+                android:id="@+id/text_fecha_devolucion"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:inputType="date"
+                android:hint="Fecha de supuesta devolución"
+                android:layout_weight="1"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+                <Button
+                    android:onClick="guardarOnClick"
+                    android:id="@+id/guardar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Guardar"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="70dp"
+                    android:layout_weight="1"
+                    />
+                <Button
+                    android:onClick="descartarOnClick"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Descartar"
+                    android:layout_weight="1"
+                    />
+            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 </RelativeLayout>
