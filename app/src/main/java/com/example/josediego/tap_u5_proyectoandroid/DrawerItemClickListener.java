@@ -6,6 +6,7 @@ package com.example.josediego.tap_u5_proyectoandroid;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -15,9 +16,9 @@ import android.widget.Toast;
 public class DrawerItemClickListener extends Activity implements ListView.OnItemClickListener {
     @Override
     public void onItemClick(AdapterView parent, View view, int position, long id) {
-        selectItem(position);
+        selectItem(position,view);
     }
-    private void selectItem(int position) {
+    private void selectItem(int position, View view) {
         FragmentManager fragmentManager = getFragmentManager();
         switch (position) {
             case 0:
