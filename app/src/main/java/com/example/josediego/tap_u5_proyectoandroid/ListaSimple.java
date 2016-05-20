@@ -1,18 +1,24 @@
 package com.example.josediego.tap_u5_proyectoandroid;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ListaSimple extends AppCompatActivity {
     private ListView lista;
     final ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
+    private SimpleDateFormat formatoFecha;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +51,33 @@ public class ListaSimple extends AppCompatActivity {
                         }else{
                             ((Lista_entrada) entrada).setEntregado(true);
                             cambio("Hecho verdadero "+((Lista_entrada) entrada).get_id());
+                            mFechaPrestamo.show();
                         }
                         check.setChecked(((Lista_entrada) entrada).getEntregado());
                     }
                 });
             }
         });
+        seleccionarFecha();
+        formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
+
     }
+
+
+    private DatePickerDialog mFechaPrestamo;
+
+    private void seleccionarFecha() {
+        Calendar calendario = Calendar.getInstance();
+        mFechaPrestamo = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int anio, int mes, int dia) {
+                Calendar fecha = Calendar.getInstance();
+                fecha.set(anio, mes, dia);
+                //fechaPrestamo.setText(formatoFecha.format(fecha.getTime()));
+            }
+        }, calendario.get(Calendar.YEAR), calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH));
+    }
+
     public void cambio(String s){
         Toast toast = Toast.makeText(getApplicationContext(),s+ " :D " , Toast.LENGTH_SHORT);
         toast.show();

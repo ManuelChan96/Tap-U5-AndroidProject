@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 otraVista();
             }
         });
+
     }
     public void otraVista(){
         intent = new Intent(this, ListaSimple.class);
