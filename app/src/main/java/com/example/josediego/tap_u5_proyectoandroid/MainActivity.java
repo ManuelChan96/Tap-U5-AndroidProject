@@ -17,6 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.josediego.tap_u5_proyectoandroid.BaseDeDatos.BDPrestamos;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         boton = (Button)findViewById(R.id.main_button);
+
         Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla));
         tabla.agregarCabecera(R.array.cabecera_tabla);
         for(int i = 0; i < 15; i++){
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             elementos.add("Casilla [" + i + ", 3]");
             tabla.agregarFilaTabla(elementos);
         }
+
         items = getResources().getStringArray(R.array.items_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -75,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        BDPrestamos bd = new BDPrestamos(this);
     }
     public void otraVista(){
         intent = new Intent(this, ListaSimple.class);

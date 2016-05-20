@@ -3,20 +3,23 @@ package com.example.josediego.tap_u5_proyectoandroid.BaseDeDatos;
 
 public class Prestamos {
     public static final String TABLA_NOMBRE = "Prestamos";
+    public static final String ID = "_id";
     public static final String FECHA_PRESTAMO = "fecha_prestamo";
     public static final String FECHA_DEVOLUCION = "fecha_devolucion";
+    public static final String FECHA_REAL_DEVOLUCION = "fecha_real_devolucion";
     public static final String CANTIDAD = "cantidad";
     public static final String CLIENTE_NOMBRE = "cliente_nombre";
     public static final String OBJETO_NOMBRE = "objeto_nombre";
     public static final String ESTADO = "estado";
     public static final String DESCRIPCION = "descripcion";
-    public static final String CREATE_TABLE = "CREATE TABLE "+TABLA_NOMBRE+"( "+CLIENTE_NOMBRE+" TEXT NOT NULL, "+OBJETO_NOMBRE+" TEXT NOT NULL, "
-                                                                   +CANTIDAD+" INT NOT NULL, "+FECHA_PRESTAMO+" TEXT NOT NULL, "+FECHA_DEVOLUCION+" TEXT NOT NULL, "+ESTADO+" BOOLEAN NOT NULL, "
-                                                                    +DESCRIPCION+" TEXT NOT NULL)";
+    public static final String CREATE_TABLE = "CREATE TABLE "+TABLA_NOMBRE+"( "+ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+CLIENTE_NOMBRE+" TEXT NOT NULL, "+OBJETO_NOMBRE+" TEXT NOT NULL, "
+                                                                   +CANTIDAD+" INT NOT NULL, "+FECHA_PRESTAMO+" TEXT NOT NULL, "+FECHA_DEVOLUCION+" TEXT NOT NULL, "
+                                                                    +FECHA_REAL_DEVOLUCION+" TEXT NOT NULL, "+ESTADO+" BOOLEAN NOT NULL, " +DESCRIPCION+" TEXT NOT NULL)";
 
     private int id;
     private String fecha_prestamo;
     private String fecha_devolucion;
+    private String fecha_real_devolucion;
     private int cantidad;
     private String cliente_nombre;
     private String objeto_nombre;
@@ -30,6 +33,7 @@ public class Prestamos {
         this.cantidad = cantidad;
         this.fecha_devolucion = fecha_devolucion;
         this.fecha_prestamo = fecha_prestamo;
+        fecha_real_devolucion = "##-##-####";
         estado = false;
     }
 
@@ -91,4 +95,14 @@ public class Prestamos {
     public void setFecha_devolucion(String fecha_devolucion) {
         this.fecha_devolucion = fecha_devolucion;
     }
+
+    public String getFecha_real_devolucion(){ return fecha_real_devolucion; }
+
+    public void setFecha_real_devolucion(String fecha_real_devolucion){
+        this.fecha_real_devolucion = fecha_real_devolucion;
+    }
+
+    public int getId(){ return id;}
+
+    public void setId(int id){this.id = id;}
 }

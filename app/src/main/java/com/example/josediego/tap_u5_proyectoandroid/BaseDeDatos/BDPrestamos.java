@@ -38,6 +38,7 @@ public class BDPrestamos extends SQLiteOpenHelper{
         valores.put(Prestamos.CANTIDAD, prestamo.getCantidad());
         valores.put(Prestamos.FECHA_PRESTAMO, prestamo.getFecha_prestamo());
         valores.put(Prestamos.FECHA_DEVOLUCION, prestamo.getFecha_devolucion());
+        valores.put(Prestamos.FECHA_REAL_DEVOLUCION, prestamo.getFecha_real_devolucion());
         valores.put(Prestamos.ESTADO, prestamo.isEstado());
         valores.put(Prestamos.DESCRIPCION, prestamo.getDescripcion());
 
@@ -48,28 +49,31 @@ public class BDPrestamos extends SQLiteOpenHelper{
     public ArrayList<Prestamos> obtenerTodos(){
         ArrayList<Prestamos> prestamos = new ArrayList<>();
 
-        String columnas[] = {Prestamos.CLIENTE_NOMBRE, Prestamos.OBJETO_NOMBRE, Prestamos.CANTIDAD, Prestamos.FECHA_PRESTAMO
-        ,Prestamos.FECHA_DEVOLUCION, Prestamos.ESTADO, Prestamos.DESCRIPCION};
+        String columnas[] = {Prestamos.ID, Prestamos.CLIENTE_NOMBRE, Prestamos.OBJETO_NOMBRE, Prestamos.CANTIDAD, Prestamos.FECHA_PRESTAMO
+        , Prestamos.FECHA_DEVOLUCION, Prestamos.FECHA_REAL_DEVOLUCION, Prestamos.ESTADO, Prestamos.DESCRIPCION};
 
         Cursor c = db.query(Prestamos.TABLA_NOMBRE, columnas,null,null,null,null,null);
 
         if(c.moveToFirst()){
             do{
                 Prestamos p = new Prestamos();
-                p.setCliente_nombre(c.getString(0));
-                p.setObjeto_nombre(c.getString(1));
-                p.setCantidad(c.getInt(2));
-                p.setFecha_prestamo(c.getString(3));
-                p.setFecha_devolucion(c.getString(4));
-                p.setEstado(Boolean.parseBoolean(c.getString(5)));
-                p.setDescripcion(c.getString(6));
+                p.setId(c.getInt(0));
+                p.setCliente_nombre(c.getString(1));
+                p.setObjeto_nombre(c.getString(2));
+                p.setCantidad(c.getInt(3));
+                p.setFecha_prestamo(c.getString(4));
+                p.setFecha_devolucion(c.getString(5));
+                p.setFecha_real_devolucion(c.getString(6));
+                p.setEstado(Boolean.parseBoolean(c.getString(7)));
+                p.setDescripcion(c.getString(8));
                 prestamos.add(p);
             }while(c.moveToNext());
         }
         return prestamos;
     }
 
-   /* public void actualizarPrestamos(Prestamos prestamo){
+    public void actualizarPrestamos(Prestamos prestamo){
+
         ContentValues valores = new ContentValues();
 
         valores.put(Prestamos.CLIENTE_NOMBRE, prestamo.getCliente_nombre());
@@ -77,14 +81,15 @@ public class BDPrestamos extends SQLiteOpenHelper{
         valores.put(Prestamos.CANTIDAD, prestamo.getCantidad());
         valores.put(Prestamos.FECHA_PRESTAMO, prestamo.getFecha_prestamo());
         valores.put(Prestamos.FECHA_DEVOLUCION, prestamo.getFecha_devolucion());
+        valores.put(Prestamos.FECHA_REAL_DEVOLUCION, prestamo.getFecha_real_devolucion());
         valores.put(Prestamos.ESTADO, prestamo.isEstado());
         valores.put(Prestamos.DESCRIPCION, prestamo.getDescripcion());
 
-        String whereClause = String.format("%s=?", CabecerasPedido.ID_CABECERA_PEDIDO);
-        String[] whereArgs = {pedidoNuevo.idCabeceraPedido};
+        String whereClause = String.format("%s=?", Prestamos.ID);
+        String[] whereArgs = {prestamo.getId()+""};
 
-        db.update(Prestamos.TABLA_NOMBRE, valores, whereClaus, whereArgs);
-    }*/
+        db.update(Prestamos.TABLA_NOMBRE, valores, whereClause, whereArgs);
+    }
 
 
 }
