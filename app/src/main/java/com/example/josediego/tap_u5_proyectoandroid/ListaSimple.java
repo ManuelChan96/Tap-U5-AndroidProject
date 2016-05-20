@@ -1,6 +1,7 @@
 package com.example.josediego.tap_u5_proyectoandroid;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,6 +19,7 @@ public class ListaSimple extends AppCompatActivity {
     private ListView lista;
     final ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
     private SimpleDateFormat formatoFecha;
+    private boolean controlBoolean;
 
 
     @Override
@@ -45,15 +47,22 @@ public class ListaSimple extends AppCompatActivity {
                 check.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        controlBoolean=((Lista_entrada) entrada).getEntregado();
                         if(((Lista_entrada) entrada).getEntregado()){
-                            ((Lista_entrada) entrada).setEntregado(false);
-                            cambio("Hecho falso "+((Lista_entrada) entrada).get_id());
+                            controlBoolean=false;
+                            ((Lista_entrada) entrada).setEntregado(controlBoolean);
                         }else{
-                            ((Lista_entrada) entrada).setEntregado(true);
-                            cambio("Hecho verdadero "+((Lista_entrada) entrada).get_id());
                             mFechaPrestamo.show();
+                            ((Lista_entrada) entrada).setEntregado(controlBoolean);
                         }
-                        check.setChecked(((Lista_entrada) entrada).getEntregado());
+                        mFechaPrestamo.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                ((Lista_entrada) entrada).setEntregado(controlBoolean);
+                                check.setChecked(((Lista_entrada) entrada).getEntregado());
+                                //Toast.makeText(ListaSimple.this, "Hecho "+ check.isChecked(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
             }
@@ -62,7 +71,6 @@ public class ListaSimple extends AppCompatActivity {
         formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
 
     }
-
 
     private DatePickerDialog mFechaPrestamo;
 
@@ -76,7 +84,34 @@ public class ListaSimple extends AppCompatActivity {
                 //fechaPrestamo.setText(formatoFecha.format(fecha.getTime()));
             }
         }, calendario.get(Calendar.YEAR), calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH));
+        //mFechaPrestamo.setOnDismissListener(mOnDismissListener);
+        mFechaPrestamo.setButton(DialogInterface.BUTTON_NEGATIVE, "cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == DialogInterface.BUTTON_NEGATIVE) {
+                    setControlBoolean(false);
+                    //Toast.makeText(ListaSimple.this, controlBoolean+"CB", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        mFechaPrestamo.setButton(DialogInterface.BUTTON_POSITIVE, "aceptar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    setControlBoolean(true);
+                    //Toast.makeText(ListaSimple.this, "CB"+controlBoolean, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
+    private void setControlBoolean(boolean bool){
+        controlBoolean=bool;
+    }
+/*
+        private DialogInterface.OnDismissListener mOnDismissListener =
+            new DialogInterface.OnDismissListener() {
+                public void onDismiss(DialogInterface dialog) {
+                    Toast.makeText(ListaSimple.this, "Dimiseado", Toast.LENGTH_SHORT).show();
+                }
+            };*/
 
     public void cambio(String s){
         Toast toast = Toast.makeText(getApplicationContext(),s+ " :D " , Toast.LENGTH_SHORT);
