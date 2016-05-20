@@ -7,6 +7,7 @@ import java.util.Calendar;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.DatePicker;
@@ -22,9 +23,8 @@ public class NewObject extends AppCompatActivity implements OnClickListener {
     private DatePickerDialog mFechaPrestamo;
     private DatePickerDialog mFechaEntrega;
     private SimpleDateFormat formatoFecha;
+    private EditText text_tipo_objeto, text_descripcion, text_cantidad, text_nombre_persona, text_fecha_devolucion, text_fecha_prestamo;
 
-    private EditText text_tipo_objeto, text_descripcion,
-            text_cantidad, text_nombre_persona, text_fecha_devolucion, text_fecha_prestamo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,59 +80,63 @@ public class NewObject extends AppCompatActivity implements OnClickListener {
         String fechaEnt = fechaEntrega.getText().toString();
         String[] prestado = fechaPres.split("-");
         String[] entregado = fechaEnt.split("-");
-        if (Integer.parseInt(prestado[2])==Integer.parseInt(entregado[2])){
-            if (Integer.parseInt(prestado[1])==Integer.parseInt(entregado[1])){
-                if (Integer.parseInt(prestado[0])<=Integer.parseInt(entregado[0])){
-                    //sentencia guardar en BD
-                    guardarBD();
-                    Toast toast = Toast.makeText(getApplicationContext(), "Fecha valida", Toast.LENGTH_SHORT);
-                    toast.show();
-                    System.exit(0);
-                }else {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Fecha de entrega no puede ser mayor que fecha de prestamo", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            }else if (Integer.parseInt(prestado[1])<Integer.parseInt(entregado[1])){
-                //sentencia guardar en BD
-                guardarBD();
-                Toast toast = Toast.makeText(getApplicationContext(), "Fecha valida", Toast.LENGTH_SHORT);
-                toast.show();
-                System.exit(0);
-            }else {
-                Toast toast = Toast.makeText(getApplicationContext(), "Fecha de entrega no puede ser mayor que fecha de prestamo", Toast.LENGTH_SHORT);
+        String persona_nombre="";
+        String objeto_nombre="";
+        int cantidad=0;
+        String fecha_prestamo="";
+        String fecha_devolucion="";
+        String descripcion="";
+        try {
+            persona_nombre = text_nombre_persona.getText().toString();
+            objeto_nombre = text_tipo_objeto.getText().toString();
+            cantidad = Integer.parseInt(text_cantidad.getText().toString());
+            fecha_prestamo = text_fecha_prestamo.getText().toString();
+            fecha_devolucion = text_fecha_devolucion.getText().toString();
+            descripcion = text_descripcion.getText().toString();
+            if (persona_nombre.isEmpty() || objeto_nombre.isEmpty() || cantidad < 1 || fecha_prestamo.isEmpty() || fecha_devolucion.isEmpty() || descripcion.isEmpty()) {
+                Toast toast = Toast.makeText(getApplicationContext(), "No puede haber campos vacios", Toast.LENGTH_SHORT);
                 toast.show();
             }
-        }else if(Integer.parseInt(prestado[2])<Integer.parseInt(entregado[2])){
-            //sentencia guardar en BD
-            guardarBD();
-            Toast toast = Toast.makeText(getApplicationContext(), "Fecha valida", Toast.LENGTH_SHORT);
-            toast.show();
-            System.exit(0);
-        }else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Fecha de entrega no puede ser mayor que fecha de prestamo", Toast.LENGTH_SHORT);
+            if (Integer.parseInt(prestado[2]) == Integer.parseInt(entregado[2])) {
+                if (Integer.parseInt(prestado[1]) == Integer.parseInt(entregado[1])) {
+                    if (Integer.parseInt(prestado[0]) <= Integer.parseInt(entregado[0])) {
+                        //sentencia guardar en BD
+                        guardarBD(persona_nombre, objeto_nombre, cantidad, fecha_prestamo, fecha_devolucion, descripcion);
+                        System.exit(0);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Guardado", Toast.LENGTH_SHORT);
+                        toast.show();
+                    } else {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                } else if (Integer.parseInt(prestado[1]) < Integer.parseInt(entregado[1])) {
+                    //sentencia guardar en BD
+                    guardarBD(persona_nombre, objeto_nombre, cantidad, fecha_prestamo, fecha_devolucion, descripcion);
+                    System.exit(0);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Guardado", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            } else if (Integer.parseInt(prestado[2]) < Integer.parseInt(entregado[2])) {
+                //sentencia guardar en BD
+                guardarBD(persona_nombre, objeto_nombre, cantidad, fecha_prestamo, fecha_devolucion, descripcion);
+                System.exit(0);
+                Toast toast = Toast.makeText(getApplicationContext(), "Guardado", Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }catch(Exception e){
+            Toast toast = Toast.makeText(getApplicationContext(), "No puede haber campos vacios", Toast.LENGTH_SHORT);
             toast.show();
         }
     }
-
-    public void guardarBD(){
-
-        String cliente_nombre = text_nombre_persona.getText().toString();
-        String objeto_nombre = text_tipo_objeto.getText().toString();
-        int cantidad = Integer.parseInt(text_cantidad.getText().toString());
-        String fecha_prestamo = text_fecha_prestamo.getText().toString();
-        String fecha_devolucion = text_fecha_devolucion.getText().toString();
-        String descripcion = text_descripcion.getText().toString();
-
+    public void guardarBD(String cliente_nombre, String objeto_nombre, int cantidad, String fecha_prestamo, String fecha_devolucion, String descripcion){
         BDPrestamos db = new BDPrestamos(this);
         db.insertarPrestamos(new Prestamos(objeto_nombre, cliente_nombre, cantidad, fecha_devolucion, fecha_prestamo, descripcion));
-
-        text_nombre_persona.setText("");
-        text_tipo_objeto.setText("");
-        text_cantidad.setText("");
-        text_fecha_prestamo.setText("");
-        text_fecha_devolucion.setText("");
-        text_descripcion.setText("");
-
     }
 
     public void descartarOnClick(View view){
