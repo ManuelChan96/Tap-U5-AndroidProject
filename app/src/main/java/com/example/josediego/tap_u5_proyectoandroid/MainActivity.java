@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < 15; i++){
             ArrayList<String> elementos = new ArrayList<String>();
             elementos.add(Integer.toString(i));
-            elementos.add("Casilla [" + i + ", 0]");
+            elementos.add("Casilla [" + i + ",  0]");
             elementos.add("Casilla [" + i + ", 1]");
             elementos.add("Casilla [" + i + ", 2]");
             elementos.add("Casilla [" + i + ", 3]");
