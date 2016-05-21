@@ -71,7 +71,7 @@ public class NewObject extends AppCompatActivity implements OnClickListener {
     public void onClick(View view) {
         if(view == fechaPrestamo) {
             mFechaPrestamo.show();
-        } else if(view == fechaEntrega) {
+        } else {
             mFechaEntrega.show();
         }
     }

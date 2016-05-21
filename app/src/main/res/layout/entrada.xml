@@ -1,59 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:focusable="false"
+    android:focusableInTouchMode="false">
+    <CheckBox
+        android:id="@+id/checked"
+        android:layout_width="wrap_content"
+        android:layout_height="125dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        />
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-        <CheckBox
-            android:id="@+id/checked"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
+
+        <TextView
+            android:id="@+id/textView_superior"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
+            android:layout_height="wrap_content"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             />
-
+        <TextView
+            android:id="@+id/textView_inferior"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Small Text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="horizontal"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            >
 
             <TextView
-                android:id="@+id/textView_superior"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/textView_inferior"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Small Text"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/textView_fecha_inicio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Fecha INICIO"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_weight="1"
-                    style="1"
-                    android:layout_marginRight="50dp" />
-                <TextView
-                    android:id="@+id/textView_fecha_fin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Fecha FIN"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="50dp" />
-
-            </LinearLayout>
+                android:text="Fecha prestamo"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                style="1"
+                android:layout_marginRight="35dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Fecha devolucion"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:layout_marginLeft="35dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            >
+
+            <TextView
+                android:id="@+id/textView_fecha_inicio"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="22/05/1996"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                style="1"
+                android:layout_marginRight="50dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                />
+            <TextView
+                android:id="@+id/textView_fecha_fin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="22/05/1996"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:layout_marginLeft="50dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha real de entrega"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            />
+        <TextView
+            android:id="@+id/textView_fechaReal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="22/05/1996"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            />
+    </LinearLayout>
 </LinearLayout>
