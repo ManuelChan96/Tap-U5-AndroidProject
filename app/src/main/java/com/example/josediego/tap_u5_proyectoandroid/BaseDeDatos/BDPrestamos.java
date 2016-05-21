@@ -123,8 +123,9 @@ public class BDPrestamos extends SQLiteOpenHelper{
                 p.setFecha_real_devolucion(c.getString(6));
                 p.setEstado(Boolean.parseBoolean(c.getString(7)));
                 p.setDescripcion(c.getString(8));
-                if(p.estaVencido()){
-                prestamos.add(p);}
+
+                if(p.estaVencido()){ prestamos.add(p); }
+
             }while(c.moveToNext());
         }
         return prestamos;
@@ -142,8 +143,8 @@ public class BDPrestamos extends SQLiteOpenHelper{
 
     public ArrayList<Prestamos> buscar(String nombre){
 
-        String sql = "SELECT * FROM "+Prestamos.TABLA_NOMBRE+" WHERE "+Prestamos.CLIENTE_NOMBRE+" = '"+nombre+"' OR "
-                +Prestamos.OBJETO_NOMBRE+" = '"+nombre+"' ";
+        String sql = "SELECT* FROM "+Prestamos.TABLA_NOMBRE+" WHERE "+Prestamos.CLIENTE_NOMBRE+" LIKE  '%"+nombre
+                     +"%' OR "+Prestamos.OBJETO_NOMBRE+" LIKE '%"+nombre+"%'";
 
         Cursor c = db.rawQuery(sql,null);
 

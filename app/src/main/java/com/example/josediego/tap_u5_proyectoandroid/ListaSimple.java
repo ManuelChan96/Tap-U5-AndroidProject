@@ -48,6 +48,9 @@ public class ListaSimple extends AppCompatActivity {
         if(sel.equals("entregados")){
             datos.addAll(bd.obtenerEntregados());
         }
+        if(sel.equals("busqueda")){
+            datos.addAll(bd.buscar((String)getIntent().getExtras().get("search")));
+        }
         lista = (ListView) findViewById(R.id.ListView_listado);
         lista.setAdapter(new Lista_adaptador(this, R.layout.entrada, datos) {
             @Override
