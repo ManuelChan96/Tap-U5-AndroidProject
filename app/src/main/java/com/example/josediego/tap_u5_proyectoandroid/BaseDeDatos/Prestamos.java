@@ -1,6 +1,11 @@
 package com.example.josediego.tap_u5_proyectoandroid.BaseDeDatos;
 
 
+import android.widget.Toast;
+
+import com.example.josediego.tap_u5_proyectoandroid.ListaSimple;
+
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -110,10 +115,24 @@ public class Prestamos {
     public void setId(int id){this.id = id;}
 
     public boolean estaVencido(){
+
+
         String []arg = fecha_devolucion.split("-");
-        if(Integer.parseInt(arg[2])<GregorianCalendar.YEAR && !estado){return true;}
-        if(Integer.parseInt(arg[1])<(GregorianCalendar.MONTH+1) && !estado){return true;}
-        if(Integer.parseInt(arg[0])<GregorianCalendar.DAY_OF_MONTH && !estado){return true;}
-        return false;
+        int dia = Integer.parseInt(arg[0]);
+        int mes = Integer.parseInt(arg[1]);
+        int anio = Integer.parseInt(arg[2]);
+
+        Calendar c= new GregorianCalendar();
+
+        int pa = c.get(Calendar.YEAR);
+        int pm = c.get(Calendar.MONTH)+1;
+        int pd = c.get(Calendar.DAY_OF_MONTH);
+
+        if(anio>pa){return false;}
+        if(mes>pm){return false;}
+        if(dia>pd){return false;}
+
+        return true;
+
     }
 }

@@ -107,7 +107,7 @@ public class BDPrestamos extends SQLiteOpenHelper{
     public ArrayList<Prestamos> obtenerVencidos(){
         ArrayList<Prestamos> prestamos = new ArrayList<>();
 
-        String sql = "SELECT * FROM "+Prestamos.TABLA_NOMBRE;
+        String sql = "SELECT * FROM "+Prestamos.TABLA_NOMBRE+" WHERE "+Prestamos.ESTADO+" = 0";
 
         Cursor c = db.rawQuery(sql,null);
 

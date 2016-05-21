@@ -39,13 +39,13 @@ public class ListaSimple extends AppCompatActivity {
         seleccionarFecha();
         datos.clear();
         bd = new BDPrestamos(this);
-        if(sel.equals("prestamos")){
+        if(sel.equals("1")){
             datos.addAll(bd.obtenerTodos());
         }
-        if(sel.equals("vencidos")){
+        if(sel.equals("2")){
             datos.addAll(bd.obtenerVencidos());
         }
-        if(sel.equals("entregados")){
+        if(sel.equals("3")){
             datos.addAll(bd.obtenerEntregados());
         }
         if(sel.equals("busqueda")){

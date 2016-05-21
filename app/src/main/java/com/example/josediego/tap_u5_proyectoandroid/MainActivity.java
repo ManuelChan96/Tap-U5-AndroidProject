@@ -63,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
                         case 0:
                             break;
                         case 1:
-                            otraVista("prestamos");
+                            otraVista("1");
                             break;
                         case 2:
-                            otraVista("vencidos");
+                            otraVista("2");
                             break;
                         case 3:
-                            otraVista("entregados");
+                            otraVista("3");
                             break;
                     }
                 }catch(Exception e){
