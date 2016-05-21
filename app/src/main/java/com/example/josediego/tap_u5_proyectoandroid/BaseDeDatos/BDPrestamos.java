@@ -52,7 +52,7 @@ public class BDPrestamos extends SQLiteOpenHelper{
         ArrayList<Prestamos> prestamos = new ArrayList<>();
 
         String columnas[] = {Prestamos.ID, Prestamos.CLIENTE_NOMBRE, Prestamos.OBJETO_NOMBRE, Prestamos.CANTIDAD, Prestamos.FECHA_PRESTAMO
-        , Prestamos.FECHA_DEVOLUCION, Prestamos.FECHA_REAL_DEVOLUCION, Prestamos.ESTADO, Prestamos.DESCRIPCION};
+                , Prestamos.FECHA_DEVOLUCION, Prestamos.FECHA_REAL_DEVOLUCION, Prestamos.ESTADO, Prestamos.DESCRIPCION};
 
         Cursor c = db.query(Prestamos.TABLA_NOMBRE, columnas,null,null,null,null,null);
 
@@ -144,7 +144,7 @@ public class BDPrestamos extends SQLiteOpenHelper{
     public ArrayList<Prestamos> buscar(String nombre){
 
         String sql = "SELECT* FROM "+Prestamos.TABLA_NOMBRE+" WHERE "+Prestamos.CLIENTE_NOMBRE+" LIKE  '%"+nombre
-                     +"%' OR "+Prestamos.OBJETO_NOMBRE+" LIKE '%"+nombre+"%'";
+                +"%' OR "+Prestamos.OBJETO_NOMBRE+" LIKE '%"+nombre+"%'";
 
         Cursor c = db.rawQuery(sql,null);
 

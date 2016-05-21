@@ -93,41 +93,46 @@ public class NewObject extends AppCompatActivity implements OnClickListener {
             fecha_prestamo = text_fecha_prestamo.getText().toString();
             fecha_devolucion = text_fecha_devolucion.getText().toString();
             descripcion = text_descripcion.getText().toString();
-            if (persona_nombre.isEmpty() || objeto_nombre.isEmpty() || cantidad < 1 || fecha_prestamo.isEmpty() || fecha_devolucion.isEmpty() || descripcion.isEmpty()) {
+            if (persona_nombre.isEmpty() || objeto_nombre.isEmpty() || fecha_prestamo.isEmpty() || fecha_devolucion.isEmpty() || descripcion.isEmpty()) {
                 Toast toast = Toast.makeText(getApplicationContext(), "No puede haber campos vacios", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (Integer.parseInt(prestado[2]) == Integer.parseInt(entregado[2])) {
-                if (Integer.parseInt(prestado[1]) == Integer.parseInt(entregado[1])) {
-                    if (Integer.parseInt(prestado[0]) <= Integer.parseInt(entregado[0])) {
+            if (cantidad < 1) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Cantidad inválida", Toast.LENGTH_SHORT);
+                toast.show();
+            }else {
+                if (Integer.parseInt(prestado[2]) == Integer.parseInt(entregado[2])) {
+                    if (Integer.parseInt(prestado[1]) == Integer.parseInt(entregado[1])) {
+                        if (Integer.parseInt(prestado[0]) <= Integer.parseInt(entregado[0])) {
+                            //sentencia guardar en BD
+                            guardarBD(persona_nombre, objeto_nombre, cantidad, fecha_prestamo, fecha_devolucion, descripcion);
+                            finish();
+                            Toast toast = Toast.makeText(getApplicationContext(), "Guardado", Toast.LENGTH_SHORT);
+                            toast.show();
+                        } else {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    } else if (Integer.parseInt(prestado[1]) < Integer.parseInt(entregado[1])) {
                         //sentencia guardar en BD
                         guardarBD(persona_nombre, objeto_nombre, cantidad, fecha_prestamo, fecha_devolucion, descripcion);
-                        System.exit(0);
+                        finish();
                         Toast toast = Toast.makeText(getApplicationContext(), "Guardado", Toast.LENGTH_SHORT);
                         toast.show();
                     } else {
                         Toast toast = Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT);
                         toast.show();
                     }
-                } else if (Integer.parseInt(prestado[1]) < Integer.parseInt(entregado[1])) {
+                } else if (Integer.parseInt(prestado[2]) < Integer.parseInt(entregado[2])) {
                     //sentencia guardar en BD
                     guardarBD(persona_nombre, objeto_nombre, cantidad, fecha_prestamo, fecha_devolucion, descripcion);
-                    System.exit(0);
+                    finish();
                     Toast toast = Toast.makeText(getApplicationContext(), "Guardado", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT);
                     toast.show();
                 }
-            } else if (Integer.parseInt(prestado[2]) < Integer.parseInt(entregado[2])) {
-                //sentencia guardar en BD
-                guardarBD(persona_nombre, objeto_nombre, cantidad, fecha_prestamo, fecha_devolucion, descripcion);
-                System.exit(0);
-                Toast toast = Toast.makeText(getApplicationContext(), "Guardado", Toast.LENGTH_SHORT);
-                toast.show();
-            } else {
-                Toast toast = Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT);
-                toast.show();
             }
         }catch(Exception e){
             Toast toast = Toast.makeText(getApplicationContext(), "No puede haber campos vacios", Toast.LENGTH_SHORT);
@@ -140,6 +145,6 @@ public class NewObject extends AppCompatActivity implements OnClickListener {
     }
 
     public void descartarOnClick(View view){
-        System.exit(0);
+        finish();
     }
 }

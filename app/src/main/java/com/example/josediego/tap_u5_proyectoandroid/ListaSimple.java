@@ -2,11 +2,20 @@ package com.example.josediego.tap_u5_proyectoandroid;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ListView;
@@ -29,6 +38,11 @@ public class ListaSimple extends AppCompatActivity {
     private BDPrestamos bd;
     Prestamos temp;
     TextView fechaRealE;
+    private String[] items;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle drawerToggle;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +162,59 @@ public class ListaSimple extends AppCompatActivity {
                 builder.show();
             }
         });
+
+        items = getResources().getStringArray(R.array.items_array);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        View header= getLayoutInflater().inflate(R.layout.header, null);
+        mDrawerList.addHeaderView(header);
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, items));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView parent, View view, int position, long id){
+                try{
+                    switch (position) {
+                        case 0:
+                            break;
+                        case 1:
+                            otraVista("1");
+                            setTitle("Prestamos");
+                            finish();
+                            break;
+                        case 2:
+                            otraVista("2");
+                            setTitle("Vencidos");
+                            finish();
+                            break;
+                        case 3:
+                            otraVista("3");
+                            setTitle("Entregados");
+                            finish();
+                            break;
+                    }
+                }catch(Exception e){
+                }
+            }
+        });
+        BDPrestamos bd = new BDPrestamos(this);
+        drawerToggle = new ActionBarDrawerToggle(this,
+                mDrawerLayout, R.string.abierto, R.string.cerrado) {
+            @Override
+            public void onDrawerClosed(View draweView){
+                super.onDrawerClosed(draweView);
+                ActivityCompat.invalidateOptionsMenu(ListaSimple.this);
+            }
+            @Override
+            public void onDrawerOpened(View draweView){
+                super.onDrawerOpened(draweView);
+                ActivityCompat.invalidateOptionsMenu(ListaSimple.this);
+            }
+        };
+        mDrawerLayout.setDrawerListener(drawerToggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
     private DatePickerDialog mFechaPrestamo;
 
@@ -200,4 +267,24 @@ public class ListaSimple extends AppCompatActivity {
         controlBoolean=bool;
     }
 
+
+    public void otraVista(String s){
+        intent = new Intent(this, ListaSimple.class);
+        intent.putExtra("selected",s);
+        startActivity(intent);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        int id = item.getItemId();
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
 }

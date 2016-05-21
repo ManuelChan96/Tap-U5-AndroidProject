@@ -21,8 +21,8 @@ public class Prestamos {
     public static final String ESTADO = "estado";
     public static final String DESCRIPCION = "descripcion";
     public static final String CREATE_TABLE = "CREATE TABLE "+TABLA_NOMBRE+"( "+ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+CLIENTE_NOMBRE+" TEXT NOT NULL, "+OBJETO_NOMBRE+" TEXT NOT NULL, "
-                                                                   +CANTIDAD+" INT NOT NULL, "+FECHA_PRESTAMO+" TEXT NOT NULL, "+FECHA_DEVOLUCION+" TEXT NOT NULL, "
-                                                                    +FECHA_REAL_DEVOLUCION+" TEXT NOT NULL, "+ESTADO+" BOOLEAN NOT NULL, " +DESCRIPCION+" TEXT NOT NULL)";
+            +CANTIDAD+" INT NOT NULL, "+FECHA_PRESTAMO+" TEXT NOT NULL, "+FECHA_DEVOLUCION+" TEXT NOT NULL, "
+            +FECHA_REAL_DEVOLUCION+" TEXT NOT NULL, "+ESTADO+" BOOLEAN NOT NULL, " +DESCRIPCION+" TEXT NOT NULL)";
 
     private int id;
     private String fecha_prestamo;

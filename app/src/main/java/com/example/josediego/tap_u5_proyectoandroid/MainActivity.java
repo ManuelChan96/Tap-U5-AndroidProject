@@ -1,7 +1,5 @@
 package com.example.josediego.tap_u5_proyectoandroid;
 
-import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.MenuItemCompat;
@@ -9,11 +7,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.TableLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
@@ -35,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla));
+        Tabla tabla = new Tabla(this, (TableLayout) findViewById(R.id.tabla));
         tabla.agregarCabecera(R.array.cabecera_tabla);
-        for(int i = 0; i < 15; i++){
+        for (int i = 0; i < 15; i++) {
             ArrayList<String> elementos = new ArrayList<String>();
             elementos.add(Integer.toString(i));
             elementos.add("Casilla [" + i + ",  0]");
@@ -50,29 +46,32 @@ public class MainActivity extends AppCompatActivity {
         items = getResources().getStringArray(R.array.items_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        View header= getLayoutInflater().inflate(R.layout.header, null);
+        View header = getLayoutInflater().inflate(R.layout.header, null);
         mDrawerList.addHeaderView(header);
         // Set the adapter for the list view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, items));
         // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView parent, View view, int position, long id){
-                try{
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                try {
                     switch (position) {
                         case 0:
                             break;
                         case 1:
                             otraVista("1");
+                            setTitle("Prestamos");
                             break;
                         case 2:
                             otraVista("2");
+                            setTitle("Vencidos");
                             break;
                         case 3:
                             otraVista("3");
+                            setTitle("Entregados");
                             break;
                     }
-                }catch(Exception e){
+                } catch (Exception e) {
                 }
             }
         });
@@ -80,12 +79,13 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle = new ActionBarDrawerToggle(this,
                 mDrawerLayout, R.string.abierto, R.string.cerrado) {
             @Override
-            public void onDrawerClosed(View draweView){
+            public void onDrawerClosed(View draweView) {
                 super.onDrawerClosed(draweView);
                 ActivityCompat.invalidateOptionsMenu(MainActivity.this);
             }
+
             @Override
-            public void onDrawerOpened(View draweView){
+            public void onDrawerOpened(View draweView) {
                 super.onDrawerOpened(draweView);
                 ActivityCompat.invalidateOptionsMenu(MainActivity.this);
             }
