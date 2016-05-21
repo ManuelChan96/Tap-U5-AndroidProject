@@ -1,6 +1,9 @@
 package com.example.josediego.tap_u5_proyectoandroid.BaseDeDatos;
 
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Prestamos {
     public static final String TABLA_NOMBRE = "Prestamos";
     public static final String ID = "_id";
@@ -105,4 +108,12 @@ public class Prestamos {
     public int getId(){ return id;}
 
     public void setId(int id){this.id = id;}
+
+    public boolean estaVencido(){
+        String []arg = fecha_devolucion.split("-");
+        if(Integer.parseInt(arg[2])<GregorianCalendar.YEAR){return true;}
+        if(Integer.parseInt(arg[1])<GregorianCalendar.DAY_OF_MONTH){return true;}
+        if(Integer.parseInt(arg[0])<(GregorianCalendar.MONTH+1)){return true;}        ;
+        return false;
+    }
 }

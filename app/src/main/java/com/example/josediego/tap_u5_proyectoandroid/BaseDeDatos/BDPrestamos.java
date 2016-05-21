@@ -104,5 +104,71 @@ public class BDPrestamos extends SQLiteOpenHelper{
         return resultado > 0;
     }
 
+    public ArrayList<Prestamos> obtenerVencidos(){
+        ArrayList<Prestamos> prestamos = new ArrayList<>();
+
+        String sql = "SELECT * FROM "+Prestamos.TABLA_NOMBRE;
+
+        Cursor c = db.rawQuery(sql,null);
+
+        if(c.moveToFirst()){
+            do{
+                Prestamos p = new Prestamos();
+                p.setId(c.getInt(0));
+                p.setCliente_nombre(c.getString(1));
+                p.setObjeto_nombre(c.getString(2));
+                p.setCantidad(c.getInt(3));
+                p.setFecha_prestamo(c.getString(4));
+                p.setFecha_devolucion(c.getString(5));
+                p.setFecha_real_devolucion(c.getString(6));
+                p.setEstado(Boolean.parseBoolean(c.getString(7)));
+                p.setDescripcion(c.getString(8));
+                if(p.estaVencido() && p.isEstado()){
+                prestamos.add(p);}
+            }while(c.moveToNext());
+        }
+        return prestamos;
+    }
+
+    public ArrayList<Prestamos> obtenerEntregados(){
+        ArrayList<Prestamos> prestamos = new ArrayList<>();
+
+        String sql = "SELECT * FROM "+Prestamos.TABLA_NOMBRE+" WHERE "+Prestamos.ESTADO+" = 1";
+
+        Cursor c = db.rawQuery(sql,null);
+
+        return obtenerArray(c);
+    }
+
+    public ArrayList<Prestamos> buscar(String nombre){
+
+        String sql = "SELECT * FROM "+Prestamos.TABLA_NOMBRE+" WHERE "+Prestamos.CLIENTE_NOMBRE+" = '"+nombre+"' OR "
+                +Prestamos.OBJETO_NOMBRE+" = '"+nombre+"' ";
+
+        Cursor c = db.rawQuery(sql,null);
+
+        return obtenerArray(c);
+    }
+
+    public ArrayList<Prestamos> obtenerArray(Cursor c){
+        ArrayList<Prestamos> prestamos = new ArrayList<>();
+
+        if(c.moveToFirst()){
+            do{
+                Prestamos p = new Prestamos();
+                p.setId(c.getInt(0));
+                p.setCliente_nombre(c.getString(1));
+                p.setObjeto_nombre(c.getString(2));
+                p.setCantidad(c.getInt(3));
+                p.setFecha_prestamo(c.getString(4));
+                p.setFecha_devolucion(c.getString(5));
+                p.setFecha_real_devolucion(c.getString(6));
+                p.setEstado(Boolean.parseBoolean(c.getString(7)));
+                p.setDescripcion(c.getString(8));
+                prestamos.add(p);
+            }while(c.moveToNext());
+        }
+        return prestamos;
+    }
 
 }
