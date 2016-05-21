@@ -34,12 +34,21 @@ public class ListaSimple extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listado);
+
+        String sel=(String)getIntent().getExtras().get("selected");
         seleccionarFecha();
         datos.clear();
         bd = new BDPrestamos(this);
-        datos.addAll(bd.obtenerVencidos());
+        if(sel.equals("prestamos")){
+            datos.addAll(bd.obtenerTodos());
+        }
+        if(sel.equals("vencidos")){
+            datos.addAll(bd.obtenerVencidos());
+        }
+        if(sel.equals("entregados")){
+            datos.addAll(bd.obtenerEntregados());
+        }
         lista = (ListView) findViewById(R.id.ListView_listado);
-
         lista.setAdapter(new Lista_adaptador(this, R.layout.entrada, datos) {
             @Override
             public void onEntrada(final Object entrada, View view) {
@@ -146,7 +155,6 @@ public class ListaSimple extends AppCompatActivity {
             public void onDateSet(DatePicker view, int anio, int mes, int dia) {
                 Calendar fecha = Calendar.getInstance();
                 fecha.set(anio, mes, dia);
-                Toast.makeText(ListaSimple.this, fecha.toString(), Toast.LENGTH_SHORT).show();
                 fechaEntregaR=formatoFecha.format(fecha.getTime());
                 view.getDayOfMonth();
                 view.getMonth();
