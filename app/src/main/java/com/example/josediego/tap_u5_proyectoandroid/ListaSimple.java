@@ -37,7 +37,7 @@ public class ListaSimple extends AppCompatActivity {
         seleccionarFecha();
         datos.clear();
         bd = new BDPrestamos(this);
-        datos.addAll(bd.obtenerTodos());
+        datos.addAll(bd.obtenerVencidos());
         lista = (ListView) findViewById(R.id.ListView_listado);
 
         lista.setAdapter(new Lista_adaptador(this, R.layout.entrada, datos) {
