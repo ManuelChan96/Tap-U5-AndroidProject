@@ -59,30 +59,31 @@ public class ListaSimple extends AppCompatActivity {
                 textoFechaFin.setText(((Prestamos) entrada).getFecha_devolucion());
                 fechaRealE=(TextView) textoFechaReal;
                 fechaRealE.setText(((Prestamos) entrada).getFecha_real_devolucion());
-
+                formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
                 check.setChecked(((Prestamos) entrada).isEstado());
                 check.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         controlBoolean=((Prestamos) entrada).isEstado();
-                        seleccionarFecha();
                         if(((Prestamos) entrada).isEstado()){
+                            temp=(Prestamos)entrada;
                             controlBoolean=false;
                             ((Prestamos) entrada).setEstado(controlBoolean);
                             ((Prestamos) entrada).setFecha_real_devolucion("##-##-####");
                             textoFechaReal.setText(((Prestamos) entrada).getFecha_real_devolucion());
                         }else{
-                            mFechaPrestamo.show();
                             temp=(Prestamos)entrada;
+                            mFechaPrestamo.show();
+                            ((Prestamos) entrada).setEstado(controlBoolean);
                         }
-
                         mFechaPrestamo.setOnDismissListener(new DialogInterface.OnDismissListener() {
                             @Override
                             public void onDismiss(DialogInterface dialog) {
                                 ((Prestamos) entrada).setEstado(controlBoolean);
                                 check.setChecked(((Prestamos) entrada).isEstado());
-                                //Toast.makeText(ListaSimple.this, "Hecho "+ check.isChecked(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ListaSimple.this, "Hecho "+ check.isChecked(), Toast.LENGTH_SHORT).show();
                                 textoFechaReal.setText(((Prestamos) entrada).getFecha_real_devolucion());
+                                Toast.makeText(ListaSimple.this, "Dimisseado "+ check.isChecked(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -100,21 +101,16 @@ public class ListaSimple extends AppCompatActivity {
                 builder.setMessage(elegido.getDescripcion())
                         .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // FIRE ZE MISSILES!
                                 Toast.makeText(ListaSimple.this, "Salir", Toast.LENGTH_SHORT).show();
-
                             }
                         })
                         .setNegativeButton("Eliminar Objeto", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // User cancelled the dialog
                                 AlertDialog.Builder builder2 = new AlertDialog.Builder(ListaSimple.this);
                                 builder2.setMessage("¿Está seguro que desea eliminar el objeto? Se perderá el registro")
                                         .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
-                                                // FIRE ZE MISSILES!
                                                 Toast.makeText(ListaSimple.this, "Eliminar", Toast.LENGTH_SHORT).show();
-
                                             }
                                         })
                                         .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -132,13 +128,9 @@ public class ListaSimple extends AppCompatActivity {
                 // Create the AlertDialog object and return it
                 builder.create();
                 builder.show();
-
             }
         });
-        formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-
     }
-
     private DatePickerDialog mFechaPrestamo;
 
     private void seleccionarFecha() {
@@ -148,57 +140,45 @@ public class ListaSimple extends AppCompatActivity {
             public void onDateSet(DatePicker view, int anio, int mes, int dia) {
                 Calendar fecha = Calendar.getInstance();
                 fecha.set(anio, mes, dia);
-                //fechaPrestamo.setText(formatoFecha.format(fecha.getTime()));
+                Toast.makeText(ListaSimple.this, fecha.toString(), Toast.LENGTH_SHORT).show();
                 fechaEntregaR=formatoFecha.format(fecha.getTime());
+                view.getDayOfMonth();
+                view.getMonth();
+                view.getYear();
+                fechaEntregaR= view.getDayOfMonth()+"-"+view.getMonth()+"-"+view.getYear();
 
-                Toast.makeText(getApplicationContext(), "Hola", Toast.LENGTH_SHORT);
             }
         }, calendario.get(Calendar.YEAR), calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH));
-        //mFechaPrestamo.setOnDismissListener(mOnDismissListener);
         mFechaPrestamo.setButton(DialogInterface.BUTTON_NEGATIVE, "cancelar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_NEGATIVE) {
                     setControlBoolean(false);
-                    //Toast.makeText(ListaSimple.this, controlBoolean+"CB", Toast.LENGTH_SHORT).show();
+                    temp.setEstado(controlBoolean);
+
                 }
             }
         });
         mFechaPrestamo.setButton(DialogInterface.BUTTON_POSITIVE, "aceptar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
+                    if(mFechaPrestamo.getDatePicker().getMonth()+1<=9){
+                        fechaEntregaR=mFechaPrestamo.getDatePicker().getDayOfMonth()+"-0"+(mFechaPrestamo.getDatePicker().getMonth()+1)+"-"+mFechaPrestamo.getDatePicker().getYear();
+                    }else{
+                        fechaEntregaR=mFechaPrestamo.getDatePicker().getDayOfMonth()+"-"+(mFechaPrestamo.getDatePicker().getMonth()+1)+"-"+mFechaPrestamo.getDatePicker().getYear();
+                    }
+                    Toast.makeText(ListaSimple.this,fechaEntregaR, Toast.LENGTH_SHORT).show();
                     setControlBoolean(true);
                     paraFechaReal();
-
-
-                    //Toast.makeText(ListaSimple.this, "CB"+controlBoolean, Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
     private void paraFechaReal(){
-        ((Prestamos) temp).setEstado(controlBoolean);
-        ((Prestamos) temp).setFecha_real_devolucion(fechaEntregaR);
+        ( temp).setEstado(controlBoolean);
+        ( temp).setFecha_real_devolucion(fechaEntregaR);
     }
     private void setControlBoolean(boolean bool){
         controlBoolean=bool;
     }
-/*
-        private DialogInterface.OnDismissListener mOnDismissListener =
-            new DialogInterface.OnDismissListener() {
-                public void onDismiss(DialogInterface dialog) {
-                    Toast.makeText(ListaSimple.this, "Dimiseado", Toast.LENGTH_SHORT).show();
-                }
-            };*/
 
-
-    public void cambio(String s){
-        Toast toast = Toast.makeText(getApplicationContext(),s+ " :D " , Toast.LENGTH_SHORT);
-        toast.show();
-    }
-    public String sacarFecha(int i){
-        if(i%10==0){
-            return "22-05-2001";
-        }
-        return "31-08-2020";
-    }
 }
