@@ -22,7 +22,7 @@ import java.util.Calendar;
 
 public class ListaSimple extends AppCompatActivity {
     private ListView lista;
-    final ArrayList<Prestamos> datos = new ArrayList<Prestamos>();
+    ArrayList<Prestamos> datos = new ArrayList<Prestamos>();
     private SimpleDateFormat formatoFecha;
     private boolean controlBoolean;
     private String fechaEntregaR;
@@ -36,12 +36,10 @@ public class ListaSimple extends AppCompatActivity {
         setContentView(R.layout.listado);
         seleccionarFecha();
         datos.clear();
-        //datos.addAll(bd.obtenerTodos());
-        for(int j=0;j<=30;j++){
-            datos.add(new Prestamos("Objeto prestado "+j, "Nombre persona "+j, j, "22-02-1990", "22-02-1999", j+ " Esta es la descripcion del objeto, es una parte muy interesnate de lo que debemos hacer."));
-        }
-        datos.add(new Prestamos());
-
+        datos.addAll(bd.obtenerTodos());
+        /*for(int j=0;j<=30;j++){
+            datos.add(new Prestamos("Objeto prestado "+j, "Nombre persona "+j, j, "22-02-1990", "22-02-1999", " Esta es la descripcion del objeto, es una parte muy interesnate de lo que debemos hacer."));
+        }*/
         lista = (ListView) findViewById(R.id.ListView_listado);
 
         lista.setAdapter(new Lista_adaptador(this, R.layout.entrada, datos) {
@@ -81,9 +79,7 @@ public class ListaSimple extends AppCompatActivity {
                             public void onDismiss(DialogInterface dialog) {
                                 ((Prestamos) entrada).setEstado(controlBoolean);
                                 check.setChecked(((Prestamos) entrada).isEstado());
-                                Toast.makeText(ListaSimple.this, "Hecho "+ check.isChecked(), Toast.LENGTH_SHORT).show();
                                 textoFechaReal.setText(((Prestamos) entrada).getFecha_real_devolucion());
-                                Toast.makeText(ListaSimple.this, "Dimisseado "+ check.isChecked(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -94,14 +90,13 @@ public class ListaSimple extends AppCompatActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
-                Prestamos elegido = (Prestamos) pariente.getItemAtPosition(posicion);
-                CharSequence texto = "Seleccionado: " + elegido.getObjeto_nombre();
+                final Prestamos elegido = (Prestamos) pariente.getItemAtPosition(posicion);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListaSimple.this);
-                builder.setMessage(elegido.getDescripcion())
+                builder.setMessage("Cantidad: "+elegido.getCantidad()+"\n\n Descripción: \n\n "+elegido.getDescripcion())
+
                         .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Toast.makeText(ListaSimple.this, "Salir", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton("Eliminar Objeto", new DialogInterface.OnClickListener() {
@@ -110,19 +105,19 @@ public class ListaSimple extends AppCompatActivity {
                                 builder2.setMessage("¿Está seguro que desea eliminar el objeto? Se perderá el registro")
                                         .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
-                                                Toast.makeText(ListaSimple.this, "Eliminar", Toast.LENGTH_SHORT).show();
+                                                datos.remove(elegido);
+                                                ((Lista_adaptador)lista.getAdapter()).notifyDataSetChanged();
+                                                Toast.makeText(ListaSimple.this, "Objeto Eliminado", Toast.LENGTH_SHORT).show();
                                             }
                                         })
                                         .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 // User cancelled the dialog
-                                                Toast.makeText(ListaSimple.this, "Cancelar", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                 // Create the AlertDialog object and return it
                                 builder2.create();
                                 builder2.show();
-                                Toast.makeText(ListaSimple.this, "Cancelar", Toast.LENGTH_SHORT).show();
                             }
                         });
                 // Create the AlertDialog object and return it

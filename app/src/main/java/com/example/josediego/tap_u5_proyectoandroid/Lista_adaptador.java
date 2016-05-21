@@ -23,7 +23,10 @@ import java.util.ArrayList;
             this.entradas = entradas;
             this.R_layout_IdView = R_layout_IdView;
         }
+        public void notificacion(){
+            this.notifyDataSetChanged();
 
+        }
         @Override
         public View getView(int posicion, View view, ViewGroup pariente) {
             if (view == null) {
