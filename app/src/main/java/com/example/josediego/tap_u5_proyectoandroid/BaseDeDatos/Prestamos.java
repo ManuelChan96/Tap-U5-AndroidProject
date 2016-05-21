@@ -111,9 +111,9 @@ public class Prestamos {
 
     public boolean estaVencido(){
         String []arg = fecha_devolucion.split("-");
-        if(Integer.parseInt(arg[2])<GregorianCalendar.YEAR){return true;}
-        if(Integer.parseInt(arg[1])<GregorianCalendar.DAY_OF_MONTH){return true;}
-        if(Integer.parseInt(arg[0])<(GregorianCalendar.MONTH+1)){return true;}        ;
+        if(Integer.parseInt(arg[2])<GregorianCalendar.YEAR && estado){return true;}
+        if(Integer.parseInt(arg[1])<GregorianCalendar.DAY_OF_MONTH && estado){return true;}
+        if(Integer.parseInt(arg[0])<(GregorianCalendar.MONTH+1) && estado){return true;}        ;
         return false;
     }
 }

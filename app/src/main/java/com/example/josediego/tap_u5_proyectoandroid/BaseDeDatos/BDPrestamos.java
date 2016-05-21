@@ -123,7 +123,7 @@ public class BDPrestamos extends SQLiteOpenHelper{
                 p.setFecha_real_devolucion(c.getString(6));
                 p.setEstado(Boolean.parseBoolean(c.getString(7)));
                 p.setDescripcion(c.getString(8));
-                if(p.estaVencido() && p.isEstado()){
+                if(p.estaVencido()){
                 prestamos.add(p);}
             }while(c.moveToNext());
         }
