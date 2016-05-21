@@ -26,7 +26,7 @@ public class ListaSimple extends AppCompatActivity {
     private SimpleDateFormat formatoFecha;
     private boolean controlBoolean;
     private String fechaEntregaR;
-    BDPrestamos bd;
+    private BDPrestamos bd;
     Prestamos temp;
     TextView fechaRealE;
 
@@ -36,10 +36,8 @@ public class ListaSimple extends AppCompatActivity {
         setContentView(R.layout.listado);
         seleccionarFecha();
         datos.clear();
+        bd = new BDPrestamos(this);
         datos.addAll(bd.obtenerTodos());
-        /*for(int j=0;j<=30;j++){
-            datos.add(new Prestamos("Objeto prestado "+j, "Nombre persona "+j, j, "22-02-1990", "22-02-1999", " Esta es la descripcion del objeto, es una parte muy interesnate de lo que debemos hacer."));
-        }*/
         lista = (ListView) findViewById(R.id.ListView_listado);
 
         lista.setAdapter(new Lista_adaptador(this, R.layout.entrada, datos) {
@@ -59,6 +57,17 @@ public class ListaSimple extends AppCompatActivity {
                 fechaRealE.setText(((Prestamos) entrada).getFecha_real_devolucion());
                 formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
                 check.setChecked(((Prestamos) entrada).isEstado());
+
+                if(((Prestamos) entrada).getFecha_real_devolucion().equals("##-##-####")){
+                    check.setChecked(false);
+                    setControlBoolean(false);
+                    ((Prestamos) entrada).setEstado(false);
+                }else{
+                    check.setChecked(true);
+                    setControlBoolean(true);
+                    ((Prestamos) entrada).setEstado(true);
+                }
+
                 check.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -69,6 +78,7 @@ public class ListaSimple extends AppCompatActivity {
                             ((Prestamos) entrada).setEstado(controlBoolean);
                             ((Prestamos) entrada).setFecha_real_devolucion("##-##-####");
                             textoFechaReal.setText(((Prestamos) entrada).getFecha_real_devolucion());
+                            bd.actualizarPrestamo((Prestamos)entrada);
                         }else{
                             temp=(Prestamos)entrada;
                             mFechaPrestamo.show();
@@ -106,6 +116,7 @@ public class ListaSimple extends AppCompatActivity {
                                         .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 datos.remove(elegido);
+                                                bd.eliminarPrestamo(""+elegido.getId());
                                                 ((Lista_adaptador)lista.getAdapter()).notifyDataSetChanged();
                                                 Toast.makeText(ListaSimple.this, "Objeto Eliminado", Toast.LENGTH_SHORT).show();
                                             }
@@ -164,13 +175,15 @@ public class ListaSimple extends AppCompatActivity {
                     Toast.makeText(ListaSimple.this,fechaEntregaR, Toast.LENGTH_SHORT).show();
                     setControlBoolean(true);
                     paraFechaReal();
+                    bd.actualizarPrestamo(temp);
                 }
             }
         });
     }
     private void paraFechaReal(){
-        ( temp).setEstado(controlBoolean);
+        ( temp).setEstado(true);
         ( temp).setFecha_real_devolucion(fechaEntregaR);
+
     }
     private void setControlBoolean(boolean bool){
         controlBoolean=bool;

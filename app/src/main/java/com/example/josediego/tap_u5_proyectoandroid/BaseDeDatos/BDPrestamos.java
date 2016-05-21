@@ -14,6 +14,8 @@ public class BDPrestamos extends SQLiteOpenHelper{
     private static final int SCHEME_VERSION = 1;
     private SQLiteDatabase db;
 
+
+
     public BDPrestamos(Context context) {
         super(context, DB_NAME, null, SCHEME_VERSION);
         db = getWritableDatabase();
@@ -72,7 +74,8 @@ public class BDPrestamos extends SQLiteOpenHelper{
         return prestamos;
     }
 
-    public void actualizarPrestamos(Prestamos prestamo){
+    public void actualizarPrestamo(Prestamos prestamo){
+        prestamo.setEstado(!prestamo.getFecha_real_devolucion().equals("##-##-####"));
 
         ContentValues valores = new ContentValues();
 
@@ -89,6 +92,16 @@ public class BDPrestamos extends SQLiteOpenHelper{
         String[] whereArgs = {prestamo.getId()+""};
 
         db.update(Prestamos.TABLA_NOMBRE, valores, whereClause, whereArgs);
+    }
+
+    public boolean eliminarPrestamo(String id) {
+
+        String whereClause = Prestamos.ID + "=?";
+        String[] whereArgs = {id};
+
+        int resultado = db.delete(Prestamos.TABLA_NOMBRE, whereClause, whereArgs);
+
+        return resultado > 0;
     }
 
 
