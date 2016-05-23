@@ -4,11 +4,10 @@
     <string name="cerrado">Cerrado</string>
     <!--Array con los valores de la cabecera de la tabla-->
     <string-array name="cabecera_tabla">
-        <item>Id de la fila</item>
-        <item>Valor</item>
-        <item>Valor 2</item>
-        <item>Valor 3</item>
-        <item>Valor 4</item>
+        <item>Persona</item>
+        <item>Objeto</item>
+        <item>Fecha prestamo</item>
+        <item>Fecha devolución</item>
     </string-array>
     <string name="title_activity_tabbed_test">TabbedTest</string>
     <string name="action_settings">Settings</string>

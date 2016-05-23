@@ -9,6 +9,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.example.josediego.tap_u5_proyectoandroid.BaseDeDatos.Prestamos;
+
 import java.util.ArrayList;
 
 /**

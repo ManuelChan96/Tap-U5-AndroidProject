@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.josediego.tap_u5_proyectoandroid.BaseDeDatos.BDPrestamos;
+import com.example.josediego.tap_u5_proyectoandroid.BaseDeDatos.Prestamos;
 
 import java.util.ArrayList;
 
@@ -26,23 +27,27 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle drawerToggle;
-    Intent intent;
+    private Intent intent;
+    private ArrayList<Prestamos> recientes= new ArrayList<Prestamos>();
+    private BDPrestamos bd;
+    Tabla tabla;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Tabla tabla = new Tabla(this, (TableLayout) findViewById(R.id.tabla));
+        tabla= new Tabla(this, (TableLayout) findViewById(R.id.tabla));
         tabla.agregarCabecera(R.array.cabecera_tabla);
-        for (int i = 0; i < 15; i++) {
+        bd= new BDPrestamos(this);
+        recientes.addAll(bd.obtenerRecientes());
+        for (int i=0; i<recientes.size(); i++) {
             ArrayList<String> elementos = new ArrayList<String>();
-            elementos.add(Integer.toString(i));
-            elementos.add("Casilla [" + i + ",  0]");
-            elementos.add("Casilla [" + i + ", 1]");
-            elementos.add("Casilla [" + i + ", 2]");
-            elementos.add("Casilla [" + i + ", 3]");
+            elementos.add(recientes.get(i).getCliente_nombre());
+            elementos.add(recientes.get(i).getObjeto_nombre());
+            elementos.add(recientes.get(i).getFecha_prestamo());
+            elementos.add(recientes.get(i).getFecha_devolucion());
             tabla.agregarFilaTabla(elementos);
         }
-
         items = getResources().getStringArray(R.array.items_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -60,15 +65,18 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 1:
                             otraVista("1");
-                            setTitle("Prestamos");
+                            mDrawerList.setItemChecked(1, false);
+                            mDrawerLayout.closeDrawer(mDrawerList);
                             break;
                         case 2:
                             otraVista("2");
-                            setTitle("Vencidos");
+                            mDrawerList.setItemChecked(2, false);
+                            mDrawerLayout.closeDrawer(mDrawerList);
                             break;
                         case 3:
                             otraVista("3");
-                            setTitle("Entregados");
+                            mDrawerList.setItemChecked(3, false);
+                            mDrawerLayout.closeDrawer(mDrawerList);
                             break;
                     }
                 } catch (Exception e) {
@@ -111,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);
-
         final MenuItem searchItem= menu.findItem(R.id.menu_buscar);
         final SearchView searchView= (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -151,4 +158,6 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(this, NewObject.class);
         startActivity(intent);
     }
+
+
 }

@@ -30,6 +30,7 @@ public class NewObject extends AppCompatActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_object);
+        setTitle("Nuevo prestamo");
         formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
         fechaPrestamo = (EditText) findViewById(R.id.text_fecha_prestamo);
         fechaPrestamo.setInputType(InputType.TYPE_NULL);

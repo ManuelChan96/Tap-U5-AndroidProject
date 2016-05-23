@@ -14,8 +14,6 @@ public class BDPrestamos extends SQLiteOpenHelper{
     private static final int SCHEME_VERSION = 1;
     private SQLiteDatabase db;
 
-
-
     public BDPrestamos(Context context) {
         super(context, DB_NAME, null, SCHEME_VERSION);
         db = getWritableDatabase();
@@ -34,7 +32,6 @@ public class BDPrestamos extends SQLiteOpenHelper{
     public boolean insertarPrestamos(Prestamos prestamo) {
 
         ContentValues valores = new ContentValues();
-
         valores.put(Prestamos.CLIENTE_NOMBRE, prestamo.getCliente_nombre());
         valores.put(Prestamos.OBJETO_NOMBRE, prestamo.getObjeto_nombre());
         valores.put(Prestamos.CANTIDAD, prestamo.getCantidad());
@@ -43,19 +40,15 @@ public class BDPrestamos extends SQLiteOpenHelper{
         valores.put(Prestamos.FECHA_REAL_DEVOLUCION, prestamo.getFecha_real_devolucion());
         valores.put(Prestamos.ESTADO, prestamo.isEstado());
         valores.put(Prestamos.DESCRIPCION, prestamo.getDescripcion());
-
         db.insert(Prestamos.TABLA_NOMBRE, null, valores);
         return true;
     }
 
     public ArrayList<Prestamos> obtenerTodos(){
         ArrayList<Prestamos> prestamos = new ArrayList<>();
-
         String columnas[] = {Prestamos.ID, Prestamos.CLIENTE_NOMBRE, Prestamos.OBJETO_NOMBRE, Prestamos.CANTIDAD, Prestamos.FECHA_PRESTAMO
                 , Prestamos.FECHA_DEVOLUCION, Prestamos.FECHA_REAL_DEVOLUCION, Prestamos.ESTADO, Prestamos.DESCRIPCION};
-
         Cursor c = db.query(Prestamos.TABLA_NOMBRE, columnas,null,null,null,null,null);
-
         if(c.moveToFirst()){
             do{
                 Prestamos p = new Prestamos();
@@ -72,6 +65,27 @@ public class BDPrestamos extends SQLiteOpenHelper{
             }while(c.moveToNext());
         }
         return prestamos;
+    }
+
+    public ArrayList<Prestamos> obtenerRecientes(){
+        ArrayList<Prestamos> recientes = new ArrayList<>();
+        String columnas1[]= {Prestamos.CLIENTE_NOMBRE, Prestamos.OBJETO_NOMBRE, Prestamos.FECHA_PRESTAMO
+                , Prestamos.FECHA_DEVOLUCION};
+        Cursor c = db.query(Prestamos.TABLA_NOMBRE, columnas1,null,null,null,null,null);
+        if(c.moveToFirst()){
+            int i= 0;
+            do{
+                Prestamos p = new Prestamos();
+                p.setCliente_nombre(c.getString(0));
+                p.setObjeto_nombre(c.getString(1));
+                p.setFecha_prestamo(c.getString(2));
+                p.setFecha_devolucion(c.getString(3));
+                recientes.add(p);
+                c.moveToNext();
+                i++;
+            }while(i<c.getCount());
+        }
+        return recientes;
     }
 
     public void actualizarPrestamo(Prestamos prestamo){

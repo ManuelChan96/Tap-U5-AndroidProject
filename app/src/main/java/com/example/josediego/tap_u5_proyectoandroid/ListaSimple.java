@@ -54,15 +54,22 @@ public class ListaSimple extends AppCompatActivity {
         datos.clear();
         bd = new BDPrestamos(this);
         if(sel.equals("1")){
+            setTitle("Prestamos");
+            //mDrawerList.setItemChecked(1, true);
             datos.addAll(bd.obtenerTodos());
         }
         if(sel.equals("2")){
+            setTitle("Vencidos");
+            //mDrawerList.setItemChecked(2, true);
             datos.addAll(bd.obtenerVencidos());
         }
         if(sel.equals("3")){
+            setTitle("Entregados");
+            //mDrawerList.setItemChecked(3, true);
             datos.addAll(bd.obtenerEntregados());
         }
         if(sel.equals("busqueda")){
+            setTitle("Resultados búsqueda");
             datos.addAll(bd.buscar((String)getIntent().getExtras().get("search")));
         }
         lista = (ListView) findViewById(R.id.ListView_listado);
@@ -198,6 +205,16 @@ public class ListaSimple extends AppCompatActivity {
                 }
             }
         });
+        String sel2=(String)getIntent().getExtras().get("selected");
+        if(sel2.equals("1")){
+            mDrawerList.setItemChecked(1, true);
+        }
+        if(sel2.equals("2")){
+            mDrawerList.setItemChecked(2, true);
+        }
+        if(sel2.equals("3")){
+            mDrawerList.setItemChecked(3, true);
+        }
         BDPrestamos bd = new BDPrestamos(this);
         drawerToggle = new ActionBarDrawerToggle(this,
                 mDrawerLayout, R.string.abierto, R.string.cerrado) {
