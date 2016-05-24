@@ -276,9 +276,8 @@ public class ListaSimple extends AppCompatActivity {
         });
     }
     private void paraFechaReal(){
-        ( temp).setEstado(true);
-        ( temp).setFecha_real_devolucion(fechaEntregaR);
-
+            (temp).setEstado(true);
+            (temp).setFecha_real_devolucion(fechaEntregaR);
     }
     private void setControlBoolean(boolean bool){
         controlBoolean=bool;

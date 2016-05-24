@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         bd= new BDPrestamos(this);
         recientes.addAll(bd.obtenerRecientes());
         for (int i=0; i<recientes.size(); i++) {
+            if(i==5){
+                break;
+            }
             ArrayList<String> elementos = new ArrayList<String>();
             elementos.add(recientes.get(i).getCliente_nombre());
             elementos.add(recientes.get(i).getObjeto_nombre());
@@ -158,5 +161,10 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(this, NewObject.class);
         startActivity(intent);
     }
-    //cambio
+
+    public void onRestart(){
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
 }
