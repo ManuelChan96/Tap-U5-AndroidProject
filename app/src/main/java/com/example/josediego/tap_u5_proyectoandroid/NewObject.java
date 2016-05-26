@@ -10,6 +10,7 @@ import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,8 +19,10 @@ import com.example.josediego.tap_u5_proyectoandroid.BaseDeDatos.BDPrestamos;
 import com.example.josediego.tap_u5_proyectoandroid.BaseDeDatos.Prestamos;
 
 public class NewObject extends AppCompatActivity implements OnClickListener {
-    private EditText fechaPrestamo;
-    private EditText fechaEntrega;
+    private Button fechaPrestamo;
+    private Button fechaEntrega;
+    private EditText txtFechaPrestamo;
+    private EditText txtFechaEntrega;
     private DatePickerDialog mFechaPrestamo;
     private DatePickerDialog mFechaEntrega;
     private SimpleDateFormat formatoFecha;
@@ -32,17 +35,17 @@ public class NewObject extends AppCompatActivity implements OnClickListener {
         setContentView(R.layout.activity_new_object);
         setTitle("Nuevo prestamo");
         formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-        fechaPrestamo = (EditText) findViewById(R.id.text_fecha_prestamo);
-        fechaPrestamo.setInputType(InputType.TYPE_NULL);
-        fechaEntrega = (EditText) findViewById(R.id.text_fecha_devolucion);
-        fechaEntrega.setInputType(InputType.TYPE_NULL);
+        fechaPrestamo = (Button) findViewById(R.id.text_fecha_prestamo);
+        fechaEntrega = (Button) findViewById(R.id.text_fecha_devolucion);
+        txtFechaPrestamo = (EditText) findViewById(R.id.txt_fecha_prestamo);
+        txtFechaEntrega = (EditText) findViewById(R.id.txt_fecha_devolucion);
         seleccionarFecha();
 
         text_tipo_objeto = (EditText) findViewById(R.id.text_tipo_objeto);
         text_descripcion = (EditText) findViewById(R.id.text_descripcion);
         text_nombre_persona = (EditText) findViewById(R.id.text_nombre_persona);
-        text_fecha_devolucion = (EditText) findViewById(R.id.text_fecha_devolucion);
-        text_fecha_prestamo = (EditText) findViewById(R.id.text_fecha_prestamo);
+        text_fecha_devolucion = (EditText) findViewById(R.id.txt_fecha_devolucion);
+        text_fecha_prestamo = (EditText) findViewById(R.id.txt_fecha_prestamo);
         text_cantidad = (EditText) findViewById(R.id.text_cantidad);
     }
 
@@ -55,7 +58,7 @@ public class NewObject extends AppCompatActivity implements OnClickListener {
             public void onDateSet(DatePicker view, int anio, int mes, int dia) {
                 Calendar fecha = Calendar.getInstance();
                 fecha.set(anio, mes, dia);
-                fechaPrestamo.setText(formatoFecha.format(fecha.getTime()));
+                txtFechaPrestamo.setText(formatoFecha.format(fecha.getTime()));
             }
         }, calendario.get(Calendar.YEAR), calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH));
 
@@ -63,7 +66,7 @@ public class NewObject extends AppCompatActivity implements OnClickListener {
             public void onDateSet(DatePicker view, int anio, int mes, int dia) {
                 Calendar fecha = Calendar.getInstance();
                 fecha.set(anio, mes, dia);
-                fechaEntrega.setText(formatoFecha.format(fecha.getTime()));
+                txtFechaEntrega.setText(formatoFecha.format(fecha.getTime()));
             }
         }, calendario.get(Calendar.YEAR), calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH));
     }
@@ -77,8 +80,8 @@ public class NewObject extends AppCompatActivity implements OnClickListener {
         }
     }
     public void guardarOnClick(View view){
-        String fechaPres = fechaPrestamo.getText().toString();
-        String fechaEnt = fechaEntrega.getText().toString();
+        String fechaPres = txtFechaPrestamo.getText().toString();
+        String fechaEnt = txtFechaEntrega.getText().toString();
         String[] prestado = fechaPres.split("-");
         String[] entregado = fechaEnt.split("-");
         String persona_nombre="";
@@ -136,7 +139,7 @@ public class NewObject extends AppCompatActivity implements OnClickListener {
                 }
             }
         }catch(Exception e){
-            Toast toast = Toast.makeText(getApplicationContext(), "No puede haber campos vacios", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getApplicationContext(), "Error, asegurese de llenar todos los campos", Toast.LENGTH_SHORT);
             toast.show();
         }
     }
