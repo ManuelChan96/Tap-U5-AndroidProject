@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Control Prestamos</string>
+    <string name="app_name">Control Préstamos</string>
     <string name="abierto">Abierto</string>
     <string name="cerrado">Cerrado</string>
     <!--Array con los valores de la cabecera de la tabla-->

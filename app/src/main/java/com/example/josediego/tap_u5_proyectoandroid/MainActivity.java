@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         tabla.agregarCabecera(R.array.cabecera_tabla);
         bd= new BDPrestamos(this);
         recientes.addAll(bd.obtenerRecientes());
-        for (int i=recientes.size()-1; i>recientes.size()-5; i--) {
+        for (int i=recientes.size()-1; i>recientes.size()-6; i--) {
             if(i<0){
                 break;
             }

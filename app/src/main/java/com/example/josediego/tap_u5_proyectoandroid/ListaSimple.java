@@ -295,15 +295,13 @@ public class ListaSimple extends AppCompatActivity {
             if (Integer.parseInt(fechaPrestamo[1]) == Integer.parseInt(fechaReal[1])) {
                 if (Integer.parseInt(fechaPrestamo[0]) <= Integer.parseInt(fechaReal[0])) {
                     //fecha correcta
-                    Toast.makeText(getApplicationContext(), "primer if", Toast.LENGTH_SHORT).show();
                     return true;
                 } else {
                     Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT).show();
                     return false;
                 }
             } else if (Integer.parseInt(fechaPrestamo[1]) < Integer.parseInt(fechaReal[1])) {
-                //fecha correcta
-                Toast.makeText(getApplicationContext(), "segundo if", Toast.LENGTH_SHORT).show();
+                //fecha correcta;
                 return true;
             } else {
                 Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT).show();
@@ -311,7 +309,6 @@ public class ListaSimple extends AppCompatActivity {
             }
         } else if (Integer.parseInt(fechaPrestamo[2]) < Integer.parseInt(fechaReal[2])) {
             //fecha correcta
-            Toast.makeText(getApplicationContext(), "tercer if", Toast.LENGTH_SHORT).show();
             return true;
         } else {
             Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT).show();
