@@ -255,6 +255,8 @@ public class ListaSimple extends AppCompatActivity {
                 if (which == DialogInterface.BUTTON_NEGATIVE) {
                     setControlBoolean(false);
                     temp.setEstado(controlBoolean);
+                    temp.setFecha_real_devolucion("##-##-####");
+
 
                 }
             }
@@ -268,17 +270,55 @@ public class ListaSimple extends AppCompatActivity {
                         fechaEntregaR=mFechaPrestamo.getDatePicker().getDayOfMonth()+"-"+(mFechaPrestamo.getDatePicker().getMonth()+1)+"-"+mFechaPrestamo.getDatePicker().getYear();
                     }
                     Toast.makeText(ListaSimple.this,fechaEntregaR, Toast.LENGTH_SHORT).show();
-                    setControlBoolean(true);
                     paraFechaReal();
                     bd.actualizarPrestamo(temp);
+
                 }
             }
         });
     }
     private void paraFechaReal(){
-            (temp).setEstado(true);
+        if(validarFecha(temp.getFecha_prestamo())){
+            setControlBoolean(true);
+            (temp).setEstado(controlBoolean);
             (temp).setFecha_real_devolucion(fechaEntregaR);
+        }else{
+            setControlBoolean(false);
+            (temp).setEstado(controlBoolean);
+            (temp).setFecha_real_devolucion("##-##-####");
+        }
     }
+    public boolean validarFecha(String s){
+        String[] fechaPrestamo = s.split("-");
+        String[] fechaReal= fechaEntregaR.split("-");
+        if (Integer.parseInt(fechaPrestamo[2]) == Integer.parseInt(fechaReal[2])) {
+            if (Integer.parseInt(fechaPrestamo[1]) == Integer.parseInt(fechaReal[1])) {
+                if (Integer.parseInt(fechaPrestamo[0]) <= Integer.parseInt(fechaReal[0])) {
+                    //fecha correcta
+                    Toast.makeText(getApplicationContext(), "primer if", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else {
+                    Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            } else if (Integer.parseInt(fechaPrestamo[1]) < Integer.parseInt(fechaReal[1])) {
+                //fecha correcta
+                Toast.makeText(getApplicationContext(), "segundo if", Toast.LENGTH_SHORT).show();
+                return true;
+            } else {
+                Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        } else if (Integer.parseInt(fechaPrestamo[2]) < Integer.parseInt(fechaReal[2])) {
+            //fecha correcta
+            Toast.makeText(getApplicationContext(), "tercer if", Toast.LENGTH_SHORT).show();
+            return true;
+        } else {
+            Toast.makeText(getApplicationContext(), "Fecha inválida", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
     private void setControlBoolean(boolean bool){
         controlBoolean=bool;
     }
